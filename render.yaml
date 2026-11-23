@@ -32,12 +32,10 @@ services:
       - key: GEMINI_API_KEY
         sync: false
 
-  # 2. REACT VITE FRONTEND STATIC SITE
+  # 2. REACT VITE FRONTEND STATIC SITE (Served globally on Render CDN)
   - type: web
     name: courseconnect-frontend
     runtime: static
-    region: oregon
-    plan: free
     branch: main
     rootDir: frontend
     buildCommand: "npm install && npm run build"
