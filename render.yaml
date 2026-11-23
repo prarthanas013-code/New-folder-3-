@@ -1,0 +1,54 @@
+# ====================================================================
+# Render Blueprint Configuration (Infrastructure-as-Code)
+# Deploys Flask Backend Web Service + React Vite Static Site
+# ====================================================================
+
+services:
+  # 1. FLASK BACKEND WEB SERVICE
+  - type: web
+    name: courseconnect-api
+    runtime: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "gunicorn backend.run:app --bind 0.0.0.0:$PORT --workers 2"
+    healthCheckPath: /api/health
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_JWT_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+
+  # 2. REACT VITE FRONTEND STATIC SITE
+  - type: web
+    name: courseconnect-frontend
+    runtime: static
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: courseconnect-api
+          property: host
