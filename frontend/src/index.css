@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #89cf96;
+    color: #192b1d;
+  }
+}
+
+/* Striped progress bar matching the uploaded UI */
+.bg-striped-green {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #38a14b,
+    #38a14b 10px,
+    #329245 10px,
+    #329245 20px
+  );
+}
+
+.bg-striped-light {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.4) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(46, 125, 60, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(46, 125, 60, 0.45);
+}

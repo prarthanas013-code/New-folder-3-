@@ -1,0 +1,3 @@
+"""
+CourseConnect Middleware Package
+"""

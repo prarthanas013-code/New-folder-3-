@@ -1,0 +1,3 @@
+"""
+CourseConnect Models Package
+"""

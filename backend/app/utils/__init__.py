@@ -1,0 +1,3 @@
+"""
+CourseConnect Utilities Package
+"""
